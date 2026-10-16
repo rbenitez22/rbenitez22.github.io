@@ -1,0 +1,44 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { listPublishedPosts } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const apps = await getCollection('apps');
+  return apps.map((app) => ({ params: { app: app.id }, props: { app } }));
+}
+
+interface Props {
+  app: CollectionEntry<'apps'>;
+}
+
+const { app } = Astro.props;
+const { Content } = await render(app);
+const posts = await listPublishedPosts(app.id);
+---
+<SiteLayout title={app.data.name} description={app.data.tagline}>
+  <header class="app-header">
+    <h1 class="app-header__name">{app.data.name}</h1>
+    <p class="app-header__tagline">{app.data.tagline}</p>
+    <p class="app-header__stack">{app.data.stack.join(' · ')}</p>
+  </header>
+
+  <article class="app-body">
+    <Content />
+  </article>
+
+  {posts.length > 0 && (
+    <section aria-labelledby="posts-heading">
+      <h2 id="posts-heading">Posts</h2>
+      <PostList posts={posts} />
+    </section>
+  )}
+</SiteLayout>
+
+<style>
+  .app-header { margin-bottom: 2rem; }
+  .app-header__tagline { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+  .app-header__stack { font-family: var(--font-label); font-size: 0.85rem; color: var(--text-muted); }
+  .app-body { max-width: 42rem; }
+</style>

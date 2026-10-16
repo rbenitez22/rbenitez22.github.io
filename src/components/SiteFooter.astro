@@ -1,0 +1,20 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <p class="site-footer__text">© {year} Roberto Benitez · The apps shown here are private; their source isn't published.</p>
+</footer>
+
+<style>
+  .site-footer {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 2.5rem;
+    border-top: 1px solid var(--surface-rule);
+  }
+  .site-footer__text {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+</style>

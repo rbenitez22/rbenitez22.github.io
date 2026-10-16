@@ -1,0 +1,57 @@
+---
+import { getEntry, render, type CollectionEntry } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import ClipPlayer from '../../components/ClipPlayer.astro';
+import { formatPublished, listPublishedPosts, readAppOf, readSlugOf } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await listPublishedPosts();
+  return posts.map((post) => ({
+    params: { app: readAppOf(post), post: readSlugOf(post) },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const appId = readAppOf(post);
+const app = await getEntry('apps', appId);
+const appName = app?.data.name ?? appId;
+const { Content } = await render(post);
+---
+<SiteLayout title={post.data.title} description={post.data.summary}>
+  <article class="post">
+    <header class="post__header">
+      <a class="post__app" href={`/${appId}/`}>{appName}</a>
+      <h1 class="post__title">{post.data.title}</h1>
+      <p class="post__summary">{post.data.summary}</p>
+      <p class="post__date">{formatPublished(post.data.published)}</p>
+    </header>
+
+    {post.data.clips.map((clip) => (
+      <ClipPlayer app={appId} name={clip.name} caption={clip.caption} />
+    ))}
+
+    <div class="post__body">
+      <Content />
+    </div>
+  </article>
+</SiteLayout>
+
+<style>
+  .post__header { max-width: 42rem; }
+  .post__app {
+    font-family: var(--font-label);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .post__title { margin-top: 0.4rem; }
+  .post__summary { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+  .post__date { font-family: var(--font-label); font-size: 0.8rem; color: var(--text-muted); }
+  .post__body { max-width: 42rem; }
+</style>

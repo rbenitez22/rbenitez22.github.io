@@ -1,0 +1,60 @@
+/*
+ * Colour tokens. The palette is private (--palette-*); components use only the
+ * roles and surfaces below it. Light is Conrad's Foundry theme; dark is its
+ * night counterpart. scripts/check-contrast.mjs checks the text/surface pairs.
+ */
+:root {
+  --palette-steel-50: #f5f7fa;
+  --palette-steel-100: #e9ecf3;
+  --palette-steel-200: #d5dbe5;
+  --palette-steel-500: #5b6b7f;
+  --palette-steel-900: #1f2a37;
+  --palette-steel-950: #141b24;
+  --palette-night-800: #1c2531;
+  --palette-night-700: #263243;
+  --palette-blue-600: #2b6aa9;
+  --palette-blue-700: #1f5289;
+  --palette-blue-300: #7fb2e5;
+  --palette-blue-200: #a9cbee;
+
+  --surface-0: var(--palette-steel-100);
+  --surface-1: var(--palette-steel-50);
+  --surface-rule: var(--palette-steel-200);
+  --text-strong: var(--palette-steel-900);
+  --text-muted: var(--palette-steel-500);
+  --accent: var(--palette-blue-600);
+  --accent-strong: var(--palette-blue-700);
+  --accent-text: var(--palette-steel-50);
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Source Sans 3', 'Ubuntu Sans', system-ui, sans-serif;
+  --font-label: 'DM Mono', 'Ubuntu Mono', monospace;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface-0: var(--palette-steel-950);
+    --surface-1: var(--palette-night-800);
+    --surface-rule: var(--palette-night-700);
+    --text-strong: var(--palette-steel-100);
+    --text-muted: var(--palette-steel-200);
+    --accent: var(--palette-blue-300);
+    --accent-strong: var(--palette-blue-200);
+    --accent-text: var(--palette-steel-950);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --surface-0: var(--palette-steel-950);
+  --surface-1: var(--palette-night-800);
+  --surface-rule: var(--palette-night-700);
+  --text-strong: var(--palette-steel-100);
+  --text-muted: var(--palette-steel-200);
+  --accent: var(--palette-blue-300);
+  --accent-strong: var(--palette-blue-200);
+  --accent-text: var(--palette-steel-950);
+  color-scheme: dark;
+}

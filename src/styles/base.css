@@ -1,0 +1,42 @@
+/*
+ * Document base and reset: the only layer that styles bare elements. Everything
+ * else is class-only. Prose rules cover Markdown bodies, which carry no classes.
+ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--surface-0);
+  color: var(--text-strong);
+  font: 400 1.0625rem/1.6 var(--font-body);
+}
+
+h1, h2, h3 {
+  margin: 0 0 0.5em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+}
+h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); margin-top: 1.6em; }
+h3 { font-size: 1.35rem; margin-top: 1.4em; }
+
+p, ul, ol { margin: 0 0 1em; }
+li + li { margin-top: 0.35em; }
+
+a { color: var(--accent); text-underline-offset: 0.18em; }
+a:hover { color: var(--accent-strong); }
+
+code {
+  font-family: var(--font-label);
+  font-size: 0.9em;
+  background: var(--surface-1);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+img, video { max-width: 100%; display: block; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }

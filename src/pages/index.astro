@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import AppCard from '../components/AppCard.astro';
+import PostList from '../components/PostList.astro';
+import { listPublishedPosts } from '../lib/posts';
+
+const apps = (await getCollection('apps')).sort((a, b) => a.data.order - b.data.order);
+const recentPosts = (await listPublishedPosts()).slice(0, 5);
+---
+<SiteLayout title="Roberto Benitez" description="Software I design and build, shown working: short demos and how they're made.">
+  <section class="intro">
+    <h1 class="intro__heading">Software, shown working</h1>
+    <p class="intro__lede">
+      I design and build full-stack applications end to end, from the database
+      schema to the last keyboard shortcut. These pages show them running: short
+      clips of real workflows, and notes on how they're built.
+    </p>
+  </section>
+
+  <section class="apps" aria-labelledby="apps-heading">
+    <h2 id="apps-heading">Apps</h2>
+    <div class="apps__grid">
+      {apps.map((app) => (
+        <AppCard href={`/${app.id}/`} name={app.data.name} tagline={app.data.tagline} stack={app.data.stack} />
+      ))}
+    </div>
+  </section>
+
+  {recentPosts.length > 0 && (
+    <section aria-labelledby="recent-heading">
+      <h2 id="recent-heading">Recent posts</h2>
+      <PostList posts={recentPosts} />
+    </section>
+  )}
+</SiteLayout>
+
+<style>
+  .intro { max-width: 42rem; margin-bottom: 2.5rem; }
+  .intro__lede { font-size: 1.2rem; color: var(--text-muted); }
+  .apps__grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  }
+</style>

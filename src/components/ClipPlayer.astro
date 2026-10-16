@@ -1,0 +1,47 @@
+---
+/**
+ * A published demo clip: the 16:9 version on wide screens, the square feed
+ * version on phones. Silent, captions burned in, so it starts muted and inline.
+ */
+interface Props {
+  app: string;
+  name: string;
+  caption: string;
+}
+
+const { app, name, caption } = Astro.props;
+const base = `/media/${app}/${name}`;
+---
+<figure class="clip">
+  <video class="clip__video" data-feed-poster={`${base}-feed-poster.png`} controls muted playsinline preload="metadata" poster={`${base}-wide-poster.png`}>
+    <source src={`${base}-feed.mp4`} type="video/mp4" media="(max-width: 40rem)" />
+    <source src={`${base}-wide.mp4`} type="video/mp4" />
+  </video>
+  <figcaption class="clip__caption">{caption}</figcaption>
+</figure>
+
+<script>
+  // A poster can't follow <source media>, so phones swap in the square one.
+  const PHONE = window.matchMedia('(max-width: 40rem)');
+  function useFeedPosters() {
+    document.querySelectorAll<HTMLVideoElement>('video[data-feed-poster]').forEach((video) => {
+      video.poster = video.dataset.feedPoster ?? video.poster;
+    });
+  }
+  if (PHONE.matches) useFeedPosters();
+</script>
+
+<style>
+  .clip { margin: 1.5rem 0 2rem; }
+  .clip__video {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--surface-rule);
+    background: var(--surface-1);
+  }
+  .clip__caption {
+    margin-top: 0.6rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+</style>

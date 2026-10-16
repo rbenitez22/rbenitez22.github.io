@@ -1,0 +1,37 @@
+---
+interface Props {
+  href: string;
+  name: string;
+  tagline: string;
+  stack: string[];
+}
+
+const { href, name, tagline, stack } = Astro.props;
+---
+<a class="app-card" href={href}>
+  <h3 class="app-card__name">{name}</h3>
+  <p class="app-card__tagline">{tagline}</p>
+  <p class="app-card__stack">{stack.join(' · ')}</p>
+</a>
+
+<style>
+  .app-card {
+    display: block;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--surface-rule);
+    border-radius: 10px;
+    background: var(--surface-1);
+    color: var(--text-strong);
+    text-decoration: none;
+    transition: border-color 120ms ease;
+  }
+  .app-card:hover { border-color: var(--accent); color: var(--text-strong); }
+  .app-card__name { margin: 0 0 0.25rem; font-size: 1.6rem; }
+  .app-card__tagline { margin: 0 0 0.75rem; }
+  .app-card__stack {
+    margin: 0;
+    font-family: var(--font-label);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+</style>
