@@ -28,7 +28,7 @@ const { Content } = await render(post);
       <a class="post__app" href={`/${appId}/`}>{appName}</a>
       <h1 class="post__title">{post.data.title}</h1>
       <p class="post__summary">{post.data.summary}</p>
-      <p class="post__date">{formatPublished(post.data.published)}</p>
+      <p class="post__date">{formatPublished(post.data.pubDate)}</p>
     </header>
 
     {post.data.clips.map((clip) => (

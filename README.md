@@ -47,7 +47,7 @@ The folder names the app, and the URL is `/<app>/<slug>/`.
 ---
 title: Ten years in one ledger
 summary: One line, shown in lists, under the title, and as the page description.
-published: 2026-10-15
+pubDate: 2026-10-15
 draft: true       # hidden from builds until false; still shown by `npm run dev`
 clips:
   - name: ledger-tour          # files under public/media/<app>/
@@ -66,7 +66,7 @@ portfolio-source/site-posts/publish-post.sh conrad/upcoming 2026-10-21   # a giv
 portfolio-source/site-posts/publish-post.sh conrad/upcoming --commit     # also commits just this post here
 ```
 
-It copies the page and any missing clips into this repo, sets `draft: false` and `published:`, and runs this repo's `npm run check` (a failure undoes everything). It then stages the post and its clips here and deletes the draft in Conrad. With `--commit` it also commits just those files here. It never pushes. Conrad's `portfolio-source/README.md` has the details. It finds this repo at `/programming/rbenitez22.github.io`, or `SITE_DIR`.
+It copies the page and any missing clips into this repo, sets `draft: false` and `pubDate:`, and runs this repo's `npm run check` (a failure undoes everything). It then stages the post and its clips here and deletes the draft in Conrad. With `--commit` it also commits just those files here. It never pushes. Conrad's `portfolio-source/README.md` has the details. It finds this repo at `/programming/rbenitez22.github.io`, or `SITE_DIR`.
 
 **Guard rail (local).** `.git/info/exclude` ignores anything new under `src/content/posts/` and `public/media/`. A stray `git add .` or `git add -A` therefore can't sweep in a post or clip that isn't live. Files already tracked are unaffected, and Conrad's `publish-post.sh` force-adds (`git add -f`) the post it's publishing. That file is never pushed, so on a fresh clone add these two lines to `.git/info/exclude`:
 

@@ -20,7 +20,7 @@ export function formatPublished(date: Date): string {
 }
 
 function comparePublishedNewestFirst(a: Post, b: Post): number {
-  return b.data.published.getTime() - a.data.published.getTime();
+  return b.data.pubDate.getTime() - a.data.pubDate.getTime();
 }
 
 /** Drafts show up under `astro dev` so they can be previewed, never in a build. */

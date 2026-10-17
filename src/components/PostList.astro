@@ -13,7 +13,7 @@ const { posts } = Astro.props;
     <li class="post-list__item">
       <a class="post-list__title" href={buildPostHref(post)}>{post.data.title}</a>
       <p class="post-list__summary">{post.data.summary}</p>
-      <p class="post-list__date">{formatPublished(post.data.published)}</p>
+      <p class="post-list__date">{formatPublished(post.data.pubDate)}</p>
     </li>
   ))}
 </ol>

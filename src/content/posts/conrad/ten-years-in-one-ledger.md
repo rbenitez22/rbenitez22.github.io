@@ -1,7 +1,7 @@
 ---
 title: Ten years in one ledger
 summary: A register for every account, a running balance that's always right, and a paycheck split across eight accounts.
-published: 2026-10-17
+pubDate: 2026-10-17
 draft: false
 clips:
   - name: ledger-tour
@@ -20,7 +20,7 @@ newest entries, scrolls back through the history, and opens a paycheck.
   loads older entries as you scroll up. Nothing is paginated by hand.
 - **One paycheck, nine lines.** The deposit lands in Checking. The other side is
   gross salary, less federal and state tax, Social Security, Medicare, medical
-  and dental insurance, and a 401(k) contribution. It's one transaction, and it
+  and dental insurance, and a 401(k) contribution. It is one transaction, and it
   balances to the cent.
 
 The history is generated demo data: a household's ten years, imported from a
