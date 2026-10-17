@@ -4,8 +4,10 @@ tagline: Double-entry accounting for personal finance — ledgers, budgets, rece
 stack: [Java 25, Spring Boot, PostgreSQL, React, TypeScript, Vision LLM, S3, Railway]
 order: 1
 ---
-I have created accounting components in various applications, often consisting only of a Chart of Accounts and a Ledger.  For many years I have wanted to create a full-featured personal finance manager.  Although it will never be finished, I have finally created it.  This is Conrad, a double-entry accounting financial manager I have named Conrad, after the proud bureaucrat and accounting from Futurama, Hermes Conrad.
-
+I have created accounting components in various applications, often consisting only of a Chart of Accounts and a 
+Ledger.  For many years, I have wanted to create a full-featured personal finance manager.  Although it will never be 
+finished, I have finally created it: a double-entry accounting financial manager I have named Conrad, after the 
+proud bureaucrat and accountant from Futurama, Hermes Conrad.
 
 ## What it does
 
@@ -22,11 +24,11 @@ I have created accounting components in various applications, often consisting o
   each line's actual spending one click away.
 - **Templates and schedules.** Recurring bills and paychecks are generated as
   editable drafts, ready to review and post.
-- **Loans and reconciling.** Amortised loans, and statement reconciliation.
+- **Loans and reconciling.** Amortized loans, and statement reconciliation.
 
 ## How it's built
 
-- **Backend.** Java 25 and Spring Boot, organised by bounded context (ledger,
+- **Backend.** Java 25 and Spring Boot, organized by bounded context (ledger,
   authorization, budgeting, templates, loans, billing) rather than by technical
   layer. PostgreSQL with Flyway migrations.
 - **Concurrency.** Background work (receipt reading, scheduled entries,
@@ -40,7 +42,7 @@ I have created accounting components in various applications, often consisting o
   caller may not see before it is serialized.
 - **Frontend.** React and TypeScript, built from small reusable components, with
   one transaction renderer used everywhere a transaction appears. Themes are
-  built from colour roles, and contrast is enforced by tests. The bookkeeping is
+  built from color roles, and contrast is enforced by tests. The bookkeeping is
   explained in place: every `?` opens the same guide that `/help` shows.
 - **Deployment.** On Railway, defined as infrastructure as code. Receipt images
   live in S3-compatible storage.

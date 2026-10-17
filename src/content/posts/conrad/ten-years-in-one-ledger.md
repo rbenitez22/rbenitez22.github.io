@@ -1,8 +1,8 @@
 ---
 title: Ten years in one ledger
 summary: A register for every account, a running balance that's always right, and a paycheck split across eight accounts.
-published: 2026-10-15
-draft: true
+published: 2026-10-17
+draft: false
 clips:
   - name: ledger-tour
     caption: The Checking register, scrolled back through ten years of history, then one paycheck opened to its splits. Demo data.
