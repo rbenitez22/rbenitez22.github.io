@@ -4,15 +4,8 @@ tagline: Double-entry accounting for personal finance — ledgers, budgets, rece
 stack: [Java 25, Spring Boot, PostgreSQL, React, TypeScript, Vision LLM, S3, Railway]
 order: 1
 ---
+I have created accounting components in various applications, often consisting only of a Chart of Accounts and a Ledger.  For many years I have wanted to create a full-featured personal finance manager.  Although it will never be finished, I have finally created it.  This is Conrad, a double-entry accounting financial manager I have named Conrad, after the proud bureaucrat and accounting from Futurama, Hermes Conrad.
 
-Conrad is a personal-finance application built on real double-entry
-bookkeeping, modelled on the accounting core of GnuCash. Every transaction
-balances. Every account keeps its own register with a running balance. One
-entry can touch as many accounts as it needs: a paycheck splits across salary,
-taxes, insurance and a 401(k). Invoices, receipts, loan payments and scheduled
-bills all end up as the same kind of balanced transaction.
-
-It's named after Hermes Conrad, Futurama's bureaucrat, who would approve.
 
 ## What it does
 

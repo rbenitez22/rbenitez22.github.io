@@ -2,7 +2,7 @@
 
 Roberto Benitez's portfolio: a static [Astro](https://astro.build) site, published to GitHub Pages at <https://rbenitez22.github.io>. It shows apps running through short demo clips, plus notes on how each is built. Conrad comes first and is the largest. **No app source lives here.** The apps are private; this repo holds only text, images and video.
 
-The clips, demo data and recording tools live in the Conrad repo under `plans/portfolio/` (recorder, VHS tapes, ffmpeg pipeline). This site only receives finished files.
+The clips, demo data and recording tools live in the Conrad repo under `portfolio-source/` (recorder, VHS tapes, ffmpeg pipeline; plans in `plans/portfolio/`). This site only receives finished files.
 
 ## Requirements
 
@@ -61,7 +61,7 @@ Body…
 Each clip is four files: `<name>-wide.mp4` (16:9), `<name>-feed.mp4` (1:1), `<name>-wide-poster.png` and `<name>-feed-poster.png`.
 - `ClipPlayer` serves the square video and poster below 40rem, and the wide ones above.
 - Clips are silent with captions burned in, so they play muted and inline.
-- Copy them in from Conrad with `plans/portfolio/pipeline/publish-clip.sh <clip> [app] [site-dir]`.
+- Copy them in from Conrad with `portfolio-source/pipeline/publish-clip.sh <clip> [app] [site-dir]`.
 - Keep each file under 10 MB. GitHub refuses files over 100 MB, and Pages doesn't serve Git LFS.
 
 ## Structure
