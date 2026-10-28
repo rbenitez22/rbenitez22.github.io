@@ -19,6 +19,13 @@ const clip = z.object({
   caption: z.string(),
 });
 
+/** A still image published under public/media/<app>/<name>, extension included. */
+const image = z.object({
+  name: z.string(),
+  alt: z.string(),
+  caption: z.string(),
+});
+
 /** One entry per post; the folder under posts/ names the app it belongs to. */
 const posts = defineCollection({
   loader: glob({ base: './src/content/posts', pattern: '*/*.md' }),
@@ -27,6 +34,7 @@ const posts = defineCollection({
     summary: z.string(),
     pubDate: z.coerce.date(),
     clips: z.array(clip).default([]),
+    images: z.array(image).default([]),
     draft: z.boolean().default(false),
   }),
 });

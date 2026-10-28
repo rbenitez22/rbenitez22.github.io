@@ -1,8 +1,9 @@
 ---
-const links = [
-  { href: '/', label: 'Work' },
-  { href: '/conrad/', label: 'Conrad' },
-];
+import { listAppsInOrder } from '../lib/apps';
+
+const apps = await listAppsInOrder();
+const appLinks = apps.map((app) => ({ href: `/${app.id}/`, label: app.data.name }));
+const links = [{ href: '/', label: 'Work' }, ...appLinks];
 const current = Astro.url.pathname;
 ---
 <header class="site-header">

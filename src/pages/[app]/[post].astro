@@ -2,6 +2,7 @@
 import { getEntry, render, type CollectionEntry } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import ClipPlayer from '../../components/ClipPlayer.astro';
+import PostImage from '../../components/PostImage.astro';
 import { formatPublished, listPublishedPosts, readAppOf, readSlugOf } from '../../lib/posts';
 
 export async function getStaticPaths() {
@@ -33,6 +34,10 @@ const { Content } = await render(post);
 
     {post.data.clips.map((clip) => (
       <ClipPlayer app={appId} name={clip.name} caption={clip.caption} />
+    ))}
+
+    {post.data.images.map((image) => (
+      <PostImage app={appId} name={image.name} alt={image.alt} caption={image.caption} />
     ))}
 
     <div class="post__body">

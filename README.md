@@ -27,7 +27,7 @@ The clips, demo data and recording tools live in the Conrad repo under `portfoli
 
 ### Apps: `src/content/apps/<app>.md`
 
-One file per app. The file name is the URL (`/conrad/`), and the Markdown body is the app's overview page.
+One file per app. The file name is the URL (`/conrad/`), and the Markdown body is the app's overview page. An app file is public as soon as it's pushed, so a new app's page is drafted in Conrad (`site-posts/<app>/_app.md`) and arrives with its first post.
 
 ```md
 ---
@@ -52,6 +52,10 @@ draft: true       # hidden from builds until false; still shown by `npm run dev`
 clips:
   - name: ledger-tour          # files under public/media/<app>/
     caption: What the clip shows.
+images:                        # optional; shown after the clips, in this order
+  - name: chat-ledger.png      # file under public/media/<app>/, extension included
+    alt: What the image shows, for screen readers.
+    caption: The line under the image.
 ---
 Body…
 ```
@@ -66,7 +70,7 @@ portfolio-source/site-posts/publish-post.sh conrad/upcoming 2026-10-21   # a giv
 portfolio-source/site-posts/publish-post.sh conrad/upcoming --commit     # also commits just this post here
 ```
 
-It copies the page and any missing clips into this repo, sets `draft: false` and `pubDate:`, and runs this repo's `npm run check` (a failure undoes everything). It then stages the post and its clips here and deletes the draft in Conrad. With `--commit` it also commits just those files here. It never pushes. Conrad's `portfolio-source/README.md` has the details. It finds this repo at `/programming/rbenitez22.github.io`, or `SITE_DIR`.
+It copies the page and any missing clips and images into this repo, sets `draft: false` and `pubDate:`, and runs this repo's `npm run check` (a failure undoes everything). An app's first post also brings the app's page (`src/content/apps/<app>.md`, drafted in Conrad as `site-posts/<app>/_app.md`), since apps have no draft flag. It then stages the post, its media and any app page here and deletes the drafts in Conrad. With `--commit` it also commits just those files here. It never pushes. Conrad's `portfolio-source/README.md` has the details. It finds this repo at `/programming/rbenitez22.github.io`, or `SITE_DIR`.
 
 **Guard rail (local).** `.git/info/exclude` ignores anything new under `src/content/posts/` and `public/media/`. A stray `git add .` or `git add -A` therefore can't sweep in a post or clip that isn't live. Files already tracked are unaffected, and Conrad's `publish-post.sh` force-adds (`git add -f`) the post it's publishing. That file is never pushed, so on a fresh clone add these two lines to `.git/info/exclude`:
 
@@ -84,18 +88,26 @@ Each clip is four files: `<name>-wide.mp4` (16:9), `<name>-feed.mp4` (1:1), `<na
 - Conrad's `portfolio-source/site-posts/publish-post.sh` copies a post's clips in when it goes live. To copy one by hand (e.g. a re-take of a live clip), use `portfolio-source/pipeline/publish-clip.sh <clip> [app] [site-dir]` in Conrad.
 - Keep each file under 10 MB. GitHub refuses files over 100 MB, and Pages doesn't serve Git LFS.
 
+### Images: `public/media/<app>/`
+
+A post can show still images instead of, or after, its clips. Each is one file named in full (`garcon-chat-ledger.png`) with its `alt` and `caption`.
+- `PostImage` frames it like a clip: full column width, rounded border, muted caption.
+- The same 10 MB limit applies. A 2560 px wide PNG of a phone screenshot is about 1 MB.
+
 ## Structure
 
 - `src/layouts/SiteLayout.astro`: the document (head, fonts, header, footer).
 - `src/components/`:
-  - `SiteHeader`, `SiteFooter`;
+  - `SiteHeader` (Work, then one link per app), `SiteFooter`;
   - `AppCard` (home page app tile);
   - `PostList` (post index);
-  - `ClipPlayer` (a clip and its caption).
+  - `ClipPlayer` (a clip and its caption);
+  - `PostImage` (a still image and its caption).
 - `src/pages/`:
   - `index.astro` (home: intro, apps, recent posts);
   - `[app]/index.astro` (app overview + its posts);
-  - `[app]/[post].astro` (a post: header, clips, body).
+  - `[app]/[post].astro` (a post: header, clips, images, body).
+- `src/lib/apps.ts`: the apps in their `order`, for the home page and the header (which links every app that has a page).
 - `src/lib/posts.ts`: post ids → app and slug, hrefs, dates, the published list (newest first; drafts only in dev).
 - `src/styles/tokens.css`: the palette is private (`--palette-*`); components use roles and surfaces only (`--surface-0/1`, `--surface-rule`, `--text-strong/muted`, `--accent`, `--accent-strong`, `--accent-text`). Light is Conrad's Foundry theme, and dark follows `prefers-color-scheme` unless `data-theme` says otherwise.
 - `src/styles/base.css`: the only layer that styles bare elements, which covers Markdown bodies. Everything else is class-only.

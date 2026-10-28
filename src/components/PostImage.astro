@@ -1,0 +1,34 @@
+---
+/**
+ * A published still image and its caption, framed like a clip.
+ */
+interface Props {
+  app: string;
+  name: string;
+  alt: string;
+  caption: string;
+}
+
+const { app, name, alt, caption } = Astro.props;
+---
+<figure class="post-image">
+  <img class="post-image__img" src={`/media/${app}/${name}`} alt={alt} loading="lazy" decoding="async" />
+  <figcaption class="post-image__caption">{caption}</figcaption>
+</figure>
+
+<style>
+  .post-image { margin: 1.5rem 0 2rem; }
+  .post-image__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--surface-rule);
+    background: var(--surface-1);
+  }
+  .post-image__caption {
+    margin-top: 0.6rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+</style>

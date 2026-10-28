@@ -1,11 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import AppCard from '../components/AppCard.astro';
 import PostList from '../components/PostList.astro';
+import { listAppsInOrder } from '../lib/apps';
 import { listPublishedPosts } from '../lib/posts';
 
-const apps = (await getCollection('apps')).sort((a, b) => a.data.order - b.data.order);
+const apps = await listAppsInOrder();
 const recentPosts = (await listPublishedPosts()).slice(0, 5);
 ---
 <SiteLayout title="Roberto Benitez" description="Software I design and build, shown working: short demos and how they're made.">
