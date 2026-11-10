@@ -13,7 +13,7 @@ clips:
 A receipt photo becomes a posted, balanced entry in under a minute, and
 nothing is posted without a look from you.
 
-## What you're seeing
+## What you are seeing
 
 - **Scan.** Pick the photo and say what paid for it: here, the Amex.
 - **Read.** A vision model reads it in the background: merchant, date, total,
@@ -23,12 +23,12 @@ nothing is posted without a look from you.
   Deli turkey is Poultry." Your words are read last, so they win.
 - **Review.** The proposal opens as an ordinary entry in the ledger's own split
   editor. In this take the model misread one price by 70¢. Conrad notices that
-  the lines don't add up to the receipt, holds the difference on a line of its
-  own, and won't post until it has an account. Choosing one that's already in
+  the lines do not add up to the receipt, holds the difference on a line of its
+  own, and will not post until it has an account. Choosing one that is already in
   the entry offers to merge it in.
 - **Posted.** One charge on the Amex, split by what was bought.
 
-## What you're seeing (API)
+## What you are seeing (API)
 
 - The photo is posted to `POST /books/{id}/receipts/upload` and comes back
   `PENDING` straight away. The reading happens in the background.
@@ -37,7 +37,7 @@ nothing is posted without a look from you.
 - `GET /receipts/{id}` returns the reading: here, the two books on one line and
   the café items on another, adding up to the receipt's $60.76.
 
-## How it's built
+## How it is built
 
 - **A job, not a request.** The upload stores the image in S3-compatible
   storage and enqueues a reading job. Workers on virtual threads claim jobs
